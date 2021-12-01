@@ -9,41 +9,41 @@
 
 Otrzymałeś zlecenie, które polega na implementacji systemu Kanban.
 
-Idealnie się składa ponieważ sam chciałeś poznać tą metodykę działania! Słyszałeś, że często jest ona wykorzystywana w działach IT i nie chciałbyś być "zielonym" jeśli trafisz do zespołu, w którym jest wykorzystywana.
+Idealnie się składa, ponieważ właśnie zamierzałeś poznać tę metodykę! Słyszałeś, że często jest wykorzystywana w działach IT i nie chcesz być zielony, gdy trafisz do korzystającego z niej zespołu.
 
-Klient chce rozwiązanie zbliżone do tego: https://kanbanblog.com/explained/
+Klient prosi o rozwiązanie zbliżone do tego: [kanbanblog.com/explained/](https://kanbanblog.com/explained/).
 
-Pamiętaj, że zanim zajmiesz się planowaniem i wdrażaniem powinieneś zgłębić wiedzę na dany temat. Proponuję, abyś zapoznał się z [4 filmami od Atlassian](https://www.youtube.com/watch?v=iVaFVa7HYj4&list=PLaD4FvsFdarR3oF1gp5_NmnlL-BQIE9sW&index=1), które pozwolą lepiej zrozumieć Ci koncepcję Kanban. Warto też zapoznać się z [artykułem w języku polskim](https://productvision.pl/2015/gdzie-scrum-nie-moze-tam-kanban-posle/), aby ograniczyć błędy związane z barierą językową.
+Pamiętaj, że zawsze zanim zajmiesz się planowaniem i wdrażaniem, powinieneś zgłębić wiedzę na dany temat. Proponuję, abyś zapoznał się z [4 filmami od Atlassian](https://www.youtube.com/watch?v=iVaFVa7HYj4&list=PLaD4FvsFdarR3oF1gp5_NmnlL-BQIE9sW&index=1), które pozwolą Ci lepiej zrozumieć koncepcję Kanban. Warto też przeczytać [artykuł w języku polskim](https://productvision.pl/2015/gdzie-scrum-nie-moze-tam-kanban-posle/), aby ograniczyć błędy związane z barierą językową.
 
-Należy również poznać [konkurencję](https://kanbantool.com/pl/), na której będziesz mógł się wzorować.
+Należy również sprawdzić [konkurencję](https://kanbantool.com/pl/), na której możesz się wzorować.
 
 
 ## Założenia
 
-Na początku zawsze warto określić [MVP](http://www.biznesowerewolucje.com/mvp-minimum-viable-product-praktycznie/). W naszym przypadku może to być:
+Na początku zawsze dobrze określić podstawowe wymagania dla [MVP](http://www.biznesowerewolucje.com/mvp-minimum-viable-product-praktycznie/). W naszym przypadku może to być:
 
-- tablica z określonymi z góry kolumnami i limitem zadań
-- zadania o cechach:
-    - nazwa
+- tablica z określonymi kolumnami i limitem zadań
+- zadania z informacjami takimi jak:
+    - nazwa zadania
     - aktualna kolumna
     - użytkownik (osoba odpowiedzialna)
-- możliwość przemieszczania zadań
+- możliwość przemieszczania zadań.
 
 ### Przechowywanie danych
 
-Na tym etapie chcemy wykorzystać najszybszą do implementacji możliwość zapisywania ustawień naszej tablic. Dlatego wybór padł na [localStorage](http://kursjs.pl/kurs/storage/storage.php). W ten sposób będzie można testować rozwiązanie nie musząc przejmować się zaawansowanymi rozwiązaniami.
+Na tym etapie chcemy wykorzystać najszybszą do implementacji możliwość zapisywania informacji o zadaniach. Dlatego wybór padł na [localStorage](http://kursjs.pl/kurs/storage/storage.php). W ten sposób będzie można testować rozwiązanie, nie przejmując się np. zewnętrzną bazą danych.
 
-Na pewno ułatwiłby Ci pracę hook, który udostępniałby metody umożliwiające zapis i odczyt danych z localStorage np.:
+Pracę ułatwiłby Ci hook, który udostępniałby metody umożliwiające zapis i odczyt danych z localStorage, np.:
 ```
 const [getItem, setItem] = useStorage('name');
 ```
 
-Dodatkowo przy pierwszym uruchomieniu należałoby pobrać dane z localStorage oraz przekazać dane do wnętrza aplikacji za pomocą Context API. Jeśli takich danych nie ma to trzeba ustawić wartości początkowe.
+Dodatkowo przy pierwszym uruchomieniu tablicy należałoby pobrać dane z localStorage i przekazać je do wnętrza aplikacji za pomocą Context API. Jeśli takich danych nie ma, to ustawiamy wartości początkowe.
 
-Trzeba się też zastanowić nad strukturą zapisywanych danych. 
+Trzeba się też zastanowić nad strukturą zapisywanych danych.
 
-Musimy przechowywać informacje o maksymalnej ilości zadań w kolumnach, ich nazwach i pewnie przydałby się jakiś identyfikator np.:
-```
+Musimy przechowywać informacje o kolumnach: maksymalną liczbę zadań, nazwę czy identyfikator, np.:
+```js
 [
     {id: 1, name: 'Pending', limit: 4},
     {id: 2, name: 'Analysis - Doing', limit: 3},
@@ -52,8 +52,8 @@ Musimy przechowywać informacje o maksymalnej ilości zadań w kolumnach, ich na
 ]
 ``` 
 
-Podobna struktura mogłbaby wyglądać przy zadaniach:
-```
+Podobną strukturę mogą mieć zadania:
+```js
 [
     {id: 1, name: 'Task1', idColumn: 1, user: 'Anna'},
     {id: 2, name: 'Task2', idColumn: 1, user: 'Anna'},
@@ -62,28 +62,33 @@ Podobna struktura mogłbaby wyglądać przy zadaniach:
 ]
 ```
 
-Ponieważ staramy się maksymalnie wszystko uprosić na początku to uznajemy, że `id` w kolumnach są zawsze kolejnymi numerami i przemieszczenie się zadań między nimi odbywa się przy pomocy dodania lub odjęcia jeden od aktualnej wartości dla `idColumn`.
+Ponieważ na początku staramy się maksymalnie wszystko uprosić, uznajemy, że `id` kolumn to kolejne liczby naturalne. Przemieszczenie zadań między kolumnami odbywa się przy pomocy dodania lub odjęcia cyfry 1 od aktualnej wartości `id` kolumny (`idColumn`).
 
 ### Komponenty
 
-Już na tym etapie powinieneś być świadomy jakich komponentów będziesz potrzebować.
+Już na tym etapie powinieneś być świadomy, jakich komponentów będziesz potrzebować.
 
-Nasza tablica może być komponentem o nazwie `<Board />`. Tablica składa się z kolumn więc będziemy potrzebować komponentu `<Column />`. W każdej kolumnie będą wyświetlane zadania więc `<Task />` też się przyda. Musimy mieć możliwość tworzenia zadań dlatego bez komponentu `<Form />` też się nie obędziemy.
+Nasza tablica może być komponentem o nazwie `<Board />`. Tablica składa się z kolumn, więc będziemy potrzebować komponentu `<Column />`. W każdej kolumnie wyświetlane są zadania – do tego przyda się `<Task />`. Musimy mieć możliwość tworzenia zadań, dlatego bez komponentu `<Form />` również się nie obędzie.
 
-## Od czego zaczać?
+## Kolejność działań
 
-Najpierw utwórz strukturę danych wew. Twojej aplikacji i postaraj się wyświetlić wszystkie elementy wkorzystując odpowiednie komponenty. Dane możesz przechowywać w `state` w komponencie `<App />`, które przekazujesz przez Context API. Pamiętaj, że w ten sposób możesz też przekazywać metody, które będą aktualizować dane w `state`.
+#### Utwórz strukturę i komunikację między komponentami
+Najpierw utwórz strukturę danych wewnątrz Twojej aplikacji i za pomocą odpowiednich komponentów postaraj się wyświetlić wszystkie elementy. Dane możesz przechowywać w `state` w komponencie `<App />` i przekazywać je przez Context API. Pamiętaj, że w ten sposób możesz też przekazywać metody, które będą aktualizować dane w `state`.
 
-Następnie zapisz dane w localStorage i sprawdź czy nadal wszystko działa.
+#### Sprawdź działanie z localStorage
+Zapisz dane w localStorage i sprawdź, czy nadal wszystko działa.
 
-Potem dopiero postaraj sie przemieszczać zadania między kolumnami bez zapisywania danych w localStorage. Jak już wspomieliśmy wystarczy ikrementować lub dekrementować pole `idColumn`. Pamiętaj, aby sprawdzić czy limit zadań w kolumnie nie jest osiągnięty i czy kolumna "następna" oraz "poprzednia" istnieje.
+#### Zaimplementuj przesuwanie zadań między kolumnami
+Gdy wszystko działa, wprowadź przemieszczanie zadań między kolumnami bez zapisywania danych w localStorage. Jak już mówiliśmy, wystarczy inkrementować lub dekrementować pole `idColumn`. Pamiętaj, aby sprawdzać, czy limit zadań w danej kolumnie nie został osiągnięty i czy kolumny następna oraz poprzednia istnieją.
 
-Jak już ten element będzie działał to daj możliwość tworzenia dodatkowych zadań przy pomocy formularza.
+#### Stwórz formularz
+Teraz daj użytkownikowi możliwość tworzenia dodatkowych zadań przy pomocy formularza.
 
-Dopiero teraz wprowadź aktualizację danych w localStorage. Zwróć uwagę, że każda zmiana `state` aplikacji powinna być zapisywana w localStorage.
+#### Uzupełnij zapisywanie danych w localStorage
+Wprowadź aktualizację danych w localStorage. Zwróć uwagę, że każda zmiana `state` aplikacji powinna być zapisywana w localStorage.
 
-Do wykonania zadania możesz użyć konfiguracji wykorzystującej ESLint-a i Prettier-a -> https://github.com/devmentor-pl/react-helloworld-modern
-
+&nbsp;
+Do wykonania zadania możesz użyć [konfiguracji wykorzystującej ESLinta i Prettiera](https://github.com/devmentor-pl/react-helloworld-modern).
 
 
 &nbsp;
