@@ -1,11 +1,14 @@
 import React from 'react';
 
-const Task = function () {
+import PropTypes from 'prop-types';
+
+const Task = function (props) {
+    const { taskName, author, description } = props;
     return (
         <li className="task">
-            <header>Task name</header>
-            <p>Description</p>
-            <p>User</p>
+            <header>{taskName}</header>
+            <p>{description}</p>
+            <p>{author}</p>
             <div className="task__button--panel">
                 <button type="button">Left</button>
                 <button type="button">Right</button>
@@ -13,5 +16,15 @@ const Task = function () {
             </div>
         </li>
     );
+};
+Task.propTypes = {
+    taskName: PropTypes.string,
+    author: PropTypes.string,
+    description: PropTypes.string,
+};
+Task.defaultProps = {
+    taskName: 'No tasks',
+    author: 'No author',
+    description: 'No desc',
 };
 export default Task;

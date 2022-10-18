@@ -1,12 +1,13 @@
 import React, { useReducer, useState } from 'react';
 import fields from './formFields';
-import checkValidation from './Validation';
+import checkValidation from './validation';
 
 const Form = function () {
     const init = {
         taskName: '',
         author: '',
         description: '',
+        idColumn: 1,
     };
     const reducer = (state, { name, value }) => ({ ...state, [name]: value });
 
