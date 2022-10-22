@@ -1,5 +1,7 @@
-import React, { useReducer, useState } from 'react';
+import React, { useContext, useReducer, useState } from 'react';
+import { TaskListContext } from '../context';
 import fields from './formFields';
+// import SendEmail from './SendEmail';
 import checkValidation from './validation';
 
 const Form = function () {
@@ -10,9 +12,10 @@ const Form = function () {
         idColumn: 1,
     };
     const reducer = (state, { name, value }) => ({ ...state, [name]: value });
-
     const [state, dispatch] = useReducer(reducer, init);
     const [errors, setErrors] = useState('');
+    // eslint-disable-next-line no-unused-vars
+    const { tasks, addTask } = useContext(TaskListContext);
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -20,23 +23,22 @@ const Form = function () {
         setErrors(wrongValues);
         if (wrongValues.length === 0) {
             setErrors(...wrongValues);
-            // eslint-disable-next-line no-console
-            console.log('task added', state);
+            tasks.push(state);
+            addTask(tasks);
         }
-        // eslint-disable-next-line no-console
-        console.log(state);
     };
+
     return (
-        <form onSubmit={handleSubmit} className="kanban__form">
-            {fields.map(({ name, type, label }) => (
+        <form onSubmit={handleSubmit}>
+            {fields.map(({ label, name, type }) => (
                 // eslint-disable-next-line jsx-a11y/label-has-associated-control
                 <label key={name}>
                     {label}
-                    <input onChange={(e) => dispatch(e.target)} name={name} type={type} />
+                    <input onChange={(e) => dispatch(e.target)} name={name} value={state[name]} type={type} />
                 </label>
             ))}
             <div>{errors}</div>
-            <input type="submit" value="Add task" />
+            <input type="submit" value="Add" />
         </form>
     );
 };

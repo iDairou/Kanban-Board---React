@@ -1,5 +1,5 @@
 import React from 'react';
 
-const TasksContext = React.createContext('');
+export const TaskListContext = React.createContext();
 
-export default TasksContext;
+export default TaskListContext;
