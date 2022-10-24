@@ -11,8 +11,8 @@ const Column = function (props) {
     const renderTasks = filteredTasks.map((t) => (
         <Task
             deleteTask={() => deleteTask(t.taskName)}
-            moveRight={() => moveRight(t.idColumn)}
-            moveLeft={() => moveLeft(t.idColumn)}
+            moveRight={() => moveRight(t.taskName)}
+            moveLeft={() => moveLeft(t.taskName)}
             taskName={t.taskName}
             author={t.author}
             description={t.description}

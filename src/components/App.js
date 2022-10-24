@@ -23,20 +23,20 @@ const App = function () {
     const deleteTask = (taskName) => {
         setTasks(tasks.filter((t) => t.taskName !== taskName));
     };
-    const moveRight = (idColumn) => {
+    const moveRight = (name) => {
         const currTasks = tasks.map((t) => {
-            if (idColumn === t.idColumn) {
+            if (name === t.taskName) {
                 // eslint-disable-next-line no-console
                 console.log(t);
-                return { t, idColumn: t.idColumn + 1 };
+                return { ...t, idColumn: t.idColumn + 1 };
             }
             return t;
         });
         setTasks(currTasks);
     };
-    const moveLeft = (idColumn) => {
+    const moveLeft = (name) => {
         const currTasks = tasks.map((t) => {
-            if (idColumn === t.idColumn) {
+            if (name === t.taskName) {
                 return { ...t, idColumn: t.idColumn - 1 };
             }
             return t;
