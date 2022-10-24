@@ -20,14 +20,17 @@ const App = function () {
         // eslint-disable-next-line no-console
         console.log(task);
     };
-    const deleteTask = (id) => {
+    const deleteTask = (taskName) => {
         // eslint-disable-next-line no-console
-        console.log(id);
-        setTasks(tasks.filter((t) => t.id !== id));
+        console.log(taskName);
+        setTasks(tasks.filter((t) => t.taskName !== taskName));
+    };
+    const moveRight = (idColumn) => {
+        setTasks(tasks[idColumn] + 1);
     };
     return (
         // eslint-disable-next-line react/jsx-no-constructed-context-values
-        <TaskListContext.Provider value={{ tasks, addTask, deleteTask }}>
+        <TaskListContext.Provider value={{ tasks, addTask, deleteTask, moveRight }}>
             <Form />
             <Board />
         </TaskListContext.Provider>

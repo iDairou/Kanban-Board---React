@@ -5,12 +5,13 @@ import { TaskListContext } from '../context';
 
 const Column = function (props) {
     const { id, name, limit } = props;
-    const { tasks, deleteTask } = useContext(TaskListContext);
+    const { tasks, deleteTask, moveRight } = useContext(TaskListContext);
 
     const filteredTasks = tasks.filter((t) => id === t.idColumn);
     const renderTasks = filteredTasks.map((t) => (
         <Task
-            deleteTask={() => deleteTask(t.id)}
+            deleteTask={() => deleteTask(t.taskName)}
+            moveRight={() => moveRight(id)}
             taskName={t.taskName}
             author={t.author}
             description={t.description}
