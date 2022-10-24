@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 const Task = function (props) {
     // eslint-disable-next-line react/prop-types, no-unused-vars
-    const { taskName, author, description, deleteTask, moveRight } = props;
+    const { taskName, author, description, deleteTask, moveRight, moveLeft } = props;
 
     return (
         <li className="task">
@@ -12,7 +12,9 @@ const Task = function (props) {
             <p>{description}</p>
             <p>{author}</p>
             <div className="task__button--panel">
-                <button type="button">Left</button>
+                <button onClick={moveLeft} type="button">
+                    Left
+                </button>
                 <button onClick={moveRight} type="button">
                     Right
                 </button>

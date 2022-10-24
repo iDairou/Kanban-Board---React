@@ -4,14 +4,13 @@ import fields from './formFields';
 // import SendEmail from './SendEmail';
 import checkValidation from './validation';
 
-const Form = function (props) {
+const Form = function () {
     const init = {
         taskName: '',
         author: '',
         description: '',
         idColumn: 1,
     };
-    const idColumn = props;
     const reducer = (state, { name, value }) => ({ ...state, [name]: value });
     const [state, dispatch] = useReducer(reducer, init);
     const [errors, setErrors] = useState('');
@@ -25,8 +24,6 @@ const Form = function (props) {
         if (wrongValues.length === 0) {
             setErrors(...wrongValues);
             tasks.push(state);
-            // eslint-disable-next-line no-console
-            console.log(idColumn);
             addTask(tasks);
         }
     };

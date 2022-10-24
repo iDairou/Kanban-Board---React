@@ -5,13 +5,14 @@ import { TaskListContext } from '../context';
 
 const Column = function (props) {
     const { id, name, limit } = props;
-    const { tasks, deleteTask, moveRight } = useContext(TaskListContext);
+    const { tasks, deleteTask, moveRight, moveLeft } = useContext(TaskListContext);
 
     const filteredTasks = tasks.filter((t) => id === t.idColumn);
     const renderTasks = filteredTasks.map((t) => (
         <Task
             deleteTask={() => deleteTask(t.taskName)}
-            moveRight={() => moveRight(id)}
+            moveRight={() => moveRight(t.idColumn)}
+            moveLeft={() => moveLeft(t.idColumn)}
             taskName={t.taskName}
             author={t.author}
             description={t.description}
@@ -19,8 +20,6 @@ const Column = function (props) {
         />
     ));
 
-    // eslint-disable-next-line no-console
-    console.log(id);
     return (
         <div key={id} className="kanban__column">
             <header>
