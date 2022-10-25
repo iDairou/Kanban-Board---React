@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Board from './Board';
 import Form from './Form';
+import columns from './columnSettings';
 
 // eslint-disable-next-line import/no-named-as-default
 import TaskListContext from '../context';
@@ -26,6 +27,9 @@ const App = function () {
     const moveRight = (name) => {
         const currTasks = tasks.map((t) => {
             if (name === t.taskName) {
+                if (t.idColumn >= columns.length) {
+                    return t;
+                }
                 // eslint-disable-next-line no-console
                 console.log(t);
                 return { ...t, idColumn: t.idColumn + 1 };
@@ -37,6 +41,9 @@ const App = function () {
     const moveLeft = (name) => {
         const currTasks = tasks.map((t) => {
             if (name === t.taskName) {
+                if (t.idColumn <= 1) {
+                    return t;
+                }
                 return { ...t, idColumn: t.idColumn - 1 };
             }
             return t;
