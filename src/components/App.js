@@ -14,13 +14,11 @@ const App = function () {
     ];
     // eslint-disable-next-line no-unused-vars
     const [tasks, setTasks] = useState(initTasks);
-
     // eslint-disable-next-line no-unused-vars
     const addTask = (task) => {
-        setTasks([...tasks, task]);
-        // eslint-disable-next-line no-console
-        console.log(task);
+        setTasks([...task]);
     };
+
     const deleteTask = (taskName) => {
         setTasks(tasks.filter((t) => t.taskName !== taskName));
     };
@@ -30,14 +28,13 @@ const App = function () {
                 if (t.idColumn >= columns.length) {
                     return t;
                 }
-                // eslint-disable-next-line no-console
-                console.log(t);
                 return { ...t, idColumn: t.idColumn + 1 };
             }
             return t;
         });
         setTasks(currTasks);
     };
+
     const moveLeft = (name) => {
         const currTasks = tasks.map((t) => {
             if (name === t.taskName) {
@@ -48,8 +45,6 @@ const App = function () {
             }
             return t;
         });
-        // eslint-disable-next-line no-console
-        console.log(currTasks);
         setTasks(currTasks);
     };
     return (
@@ -59,6 +54,6 @@ const App = function () {
             <Board />
         </TaskListContext.Provider>
     );
-};
+};;;
 
 export default App;
