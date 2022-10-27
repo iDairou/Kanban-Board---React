@@ -1,7 +1,7 @@
 import React, { useContext, useReducer, useState } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 import { TaskListContext } from '../context';
 import fields from './formFields';
-// import SendEmail from './SendEmail';
 import checkValidation from './validation';
 
 const Form = function () {
@@ -15,7 +15,7 @@ const Form = function () {
     const [state, dispatch] = useReducer(reducer, init);
     const [errors, setErrors] = useState('');
     // eslint-disable-next-line no-unused-vars
-    const { tasks, addTask } = useContext(TaskListContext);
+    const { addTask } = useContext(TaskListContext);
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -23,22 +23,29 @@ const Form = function () {
         setErrors(wrongValues);
         if (wrongValues.length === 0) {
             setErrors(...wrongValues);
-            tasks.push(state);
-            addTask(tasks);
+
+            addTask({ ...state, id: uuidv4(), isDisabledLeft: false, isDisabledRight: false });
+            console.log(state);
         }
     };
 
     return (
-        <form onSubmit={handleSubmit}>
+        <form className="kanban__form" onSubmit={handleSubmit}>
             {fields.map(({ label, name, type }) => (
                 // eslint-disable-next-line jsx-a11y/label-has-associated-control
-                <label key={name}>
+                <label className="kanban__form--label" key={name}>
                     {label}
-                    <input onChange={(e) => dispatch(e.target)} name={name} value={state[name]} type={type} />
+                    <input
+                        className="kanban__form--input"
+                        onChange={(e) => dispatch(e.target)}
+                        name={name}
+                        value={state[name]}
+                        type={type}
+                    />
                 </label>
             ))}
-            <div>{errors}</div>
-            <input type="submit" value="Add" />
+            <div className="kanban__form--errors">{errors}</div>
+            <input className="kanban__form--button button" type="submit" value="Add" />
         </form>
     );
 };

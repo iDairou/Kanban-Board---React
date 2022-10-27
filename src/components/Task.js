@@ -1,21 +1,21 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+
 // eslint-disable-next-line import/no-named-as-default
 
 const Task = function (props) {
     // eslint-disable-next-line react/prop-types, no-unused-vars
-    const { taskName, author, description, deleteTask, moveRight, moveLeft } = props;
-
+    const { taskName, author, description, deleteTask, moveRight, moveLeft, disabledLeft, disabledRight } = props;
     return (
-        <li className="task">
-            <header>{taskName}</header>
-            <p>{description}</p>
-            <p>{author}</p>
+        <li className="tasks__list--task">
+            <header>Title: {taskName}</header>
+            <p>Description: {description}</p>
+            <p>Author: {author}</p>
             <div className="task__button--panel">
-                <button onClick={moveLeft} type="button">
+                <button disabled={disabledLeft} onClick={moveLeft} type="button">
                     Left
                 </button>
-                <button onClick={moveRight} type="button">
+                <button disabled={disabledRight} onClick={moveRight} type="button">
                     Right
                 </button>
                 <button onClick={deleteTask} type="button">

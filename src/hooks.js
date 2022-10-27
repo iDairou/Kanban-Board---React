@@ -1,12 +1,16 @@
 import { useState, useEffect } from 'react';
 
-const useStorage = (name) => {
-    const [value, setValue] = useState('');
+const getSavedValue = (key, initValue) => {
+    const savedValue = JSON.parse(localStorage.getItem(key));
+    if (savedValue) {
+        return savedValue;
+    }
+    return initValue;
+};
 
-    useEffect(() => {
-        // eslint-disable-next-line no-undef
-        localStorage.setItem(name, JSON.stringify(value));
-    }, [value]);
+const useStorage = (key, initValue) => {
+    const [value, setValue] = useState(initValue);
+
     return [value, setValue];
 };
 export default useStorage;

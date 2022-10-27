@@ -20,7 +20,7 @@ const fields = [
         name: 'description',
         type: 'text',
         isRequired: true,
-        pattern: /^[A-Za-z0-9. ]{5,50}$/,
+        pattern: /^[A-Za-z0-9. ]{5,100}$/,
         error: 'Wrong description',
     },
 ];

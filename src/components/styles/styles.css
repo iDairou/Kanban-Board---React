@@ -1,0 +1,104 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap');
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+:root{
+    --oddTask: rgb(199, 241, 241);
+    --evenTask: rgb(147, 190, 190);
+    --plannedBg: rgb(236, 177, 177);
+    --progressBg: rgb(182, 182, 226);
+    --testingBg: rgb(223, 223, 192);
+    --deployBg: rgb(161, 192, 161);
+}
+.planned{
+    background-color: var(--plannedBg);
+}
+.progress{
+    background-color: var(--progressBg);
+}
+.testing{
+    background-color: var(--testingBg);
+}
+.deploy{
+    background-color: var(--deployBg);
+}
+
+body{
+    background-color: #edf2f9;
+    font-family: 'Open Sans', sans-serif;
+}
+.kanban{
+    width: 100%;
+    text-align: center;
+}
+.kanban__header{
+    padding: 30px;
+}
+.kanban__board{
+    display: flex;
+    justify-content: space-around;
+}
+.tasks__list{
+    display: inline-flex;
+    flex-direction: column;
+}
+.tasks__list--task{
+    display: inline-table;
+    border-radius: 10px;
+
+}
+.tasks__list>.tasks__list--task:nth-child(odd){
+    background-color: var(--oddTask);
+}
+.tasks__list>.tasks__list--task:nth-child(even){
+    background-color: var(--evenTask);
+} 
+.kanban__form{
+    display: flex;
+    flex-direction: column;
+}
+.kanban__form--button {
+    border: none;
+    background-color: #5cf37f;
+    padding: 5px 50px;
+    border-radius: 10px;
+    width: 20%;
+    margin: 10px auto;
+}
+.kanban__form--input{
+    width: 100%;
+    padding: 12px 20px;
+    margin: 5px 0;
+    box-sizing: border-box;
+    border: none;
+    border-bottom: 2px solid rgb(187, 255, 0);
+    text-align: center; 
+}
+.col{
+    border-radius: 10px;
+}
+.kanban__column{
+    border-top: 3px solid rgb(12, 12, 12);
+    padding: 20px 100px;
+    position: relative;
+}
+
+.kanban__column h3{
+    font-size: 25px;
+}
+.kanban__column p{
+    font-size: 20px;
+}
+.button{
+    cursor: pointer;
+    transition: .2s box-shadow;
+}
+.button:hover{
+    box-shadow: inset 0 0 100px 100px rgba(255, 255, 255, 0.3);
+}
+.tasks__list--task{
+    list-style: none;
+}
