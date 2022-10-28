@@ -34,7 +34,7 @@ body{
     text-align: center;
 }
 .kanban__header{
-    padding: 30px;
+    padding: 10px;
 }
 .kanban__board{
     display: flex;

@@ -6,7 +6,7 @@ const fields = [
         name: 'author',
         type: 'text',
         isRequired: true,
-        pattern: /^[A-Za-z0-9.^\S*$]{5,20}$/,
+        pattern: /^[A-Za-z0-9. ]{5,20}$/,
         error: <p>Wrong author (5-20 characters)</p>,
     },
     {
@@ -14,7 +14,7 @@ const fields = [
         name: 'taskName',
         type: 'text',
         isRequired: true,
-        pattern: /^[A-Za-z0-9.^\S*$]{5,30}$/,
+        pattern: /^[A-Za-z0-9. ]{5,30}$/,
         error: <p>Wrong task name (5-30 characters)</p>,
     },
 
@@ -23,7 +23,7 @@ const fields = [
         name: 'description',
         type: 'text',
         isRequired: true,
-        pattern: /^[A-Za-z0-9.^\S*$]{5,100}$/,
+        pattern: /^[A-Za-z0-9. ]{5,100}$/,
         error: <p>Wrong description (5-100 characters)</p>,
     },
 ];

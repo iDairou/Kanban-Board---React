@@ -11,13 +11,12 @@ const Form = function () {
         description: '',
         idColumn: 1,
     };
+
     const reducer = (state, { name, value }) => ({ ...state, [name]: value });
     const [state, dispatch] = useReducer(reducer, init);
     const [errors, setErrors] = useState('');
     // eslint-disable-next-line no-unused-vars
     const { addTask } = useContext(TaskListContext);
-    console.log(errors);
-
     const handleSubmit = (e) => {
         e.preventDefault();
         const wrongValues = checkValidation(state);
@@ -27,6 +26,7 @@ const Form = function () {
             addTask({ ...state, id: uuidv4(), isDisabledLeft: false, isDisabledRight: false });
         }
     };
+    
 
     return (
         <form className="kanban__form" onSubmit={handleSubmit}>
