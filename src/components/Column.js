@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef } from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import Task from './Task';
 import { ButtonDisabledContext, TaskListContext } from '../context';
@@ -7,18 +7,9 @@ const Column = function (props) {
     // eslint-disable-next-line react/prop-types
     const { id, name, limit, className } = props;
     const { tasks, deleteTask, moveRight, moveLeft } = useContext(TaskListContext);
-    const columnRef = useRef(null);
 
     const { isDisabled } = useContext(ButtonDisabledContext);
     const filteredTasks = tasks.filter((t) => id === t.idColumn);
-    useEffect(() => {
-        // eslint-disable-next-line no-console
-        console.log(columnRef.current.children.length, limit);
-        if (columnRef.current.children.length >= limit) {
-            // eslint-disable-next-line no-console
-            console.log('limit exceed');
-        }
-    }, [tasks]);
 
     const renderTasks = filteredTasks.map((t) => (
         <Task
@@ -38,13 +29,10 @@ const Column = function (props) {
         <div className={`col ${className}`}>
             <header>
                 <h3>{name}</h3>
-                <p>{limit}</p>
+                <p>Max: {limit}</p>
             </header>
             <div key={id} className="kanban__column">
-                {/* Renderować pod warunkiem: columnRef.current.children.length >= limit */}
-                <ul className="tasks__list" ref={columnRef}>
-                    {renderTasks}
-                </ul>
+                <ul className="tasks__list">{renderTasks}</ul>
             </div>
         </div>
     );

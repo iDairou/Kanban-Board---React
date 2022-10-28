@@ -1,5 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowLeft, faArrowRight, faTrash, faUser } from '@fortawesome/free-solid-svg-icons';
 
 // eslint-disable-next-line import/no-named-as-default
 
@@ -8,18 +10,22 @@ const Task = function (props) {
     const { taskName, author, description, deleteTask, moveRight, moveLeft, disabledLeft, disabledRight } = props;
     return (
         <li className="tasks__list--task">
-            <header>Title: {taskName}</header>
-            <p>Description: {description}</p>
-            <p>Author: {author}</p>
+            <p className="task__author">
+                {' '}
+                <FontAwesomeIcon icon={faUser} /> {author}
+            </p>
+            <h3 className="task__title">{taskName}</h3>
+            <p className="task__description">D: {description}</p>
+
             <div className="task__button--panel">
-                <button disabled={disabledLeft} onClick={moveLeft} type="button">
-                    Left
+                <button className="button__left button" disabled={disabledLeft} onClick={moveLeft} type="button">
+                    <FontAwesomeIcon icon={faArrowLeft} />
                 </button>
-                <button disabled={disabledRight} onClick={moveRight} type="button">
-                    Right
+                <button className="button__right button" disabled={disabledRight} onClick={moveRight} type="button">
+                    <FontAwesomeIcon icon={faArrowRight} />
                 </button>
-                <button onClick={deleteTask} type="button">
-                    Delete
+                <button className="button__delete button" onClick={deleteTask} type="button">
+                    <FontAwesomeIcon icon={faTrash} />
                 </button>
             </div>
         </li>

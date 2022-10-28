@@ -1,4 +1,3 @@
-
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap');
 *{
     box-sizing: border-box;
@@ -7,7 +6,7 @@
 }
 :root{
     --oddTask: rgb(199, 241, 241);
-    --evenTask: rgb(147, 190, 190);
+    --evenTask: rgb(140, 245, 245);
     --plannedBg: rgb(236, 177, 177);
     --progressBg: rgb(182, 182, 226);
     --testingBg: rgb(223, 223, 192);
@@ -40,14 +39,19 @@ body{
 .kanban__board{
     display: flex;
     justify-content: space-around;
+    flex-grow: 1;
 }
 .tasks__list{
-    display: inline-flex;
+    display: flex;
     flex-direction: column;
+    width: 90%;
+    margin: 0 auto;
 }
 .tasks__list--task{
     display: inline-table;
     border-radius: 10px;
+    padding: 20px;
+    margin: 10px;
 
 }
 .tasks__list>.tasks__list--task:nth-child(odd){
@@ -60,45 +64,65 @@ body{
     display: flex;
     flex-direction: column;
 }
-.kanban__form--button {
-    border: none;
-    background-color: #5cf37f;
-    padding: 5px 50px;
-    border-radius: 10px;
-    width: 20%;
-    margin: 10px auto;
-}
+
 .kanban__form--input{
-    width: 100%;
-    padding: 12px 20px;
-    margin: 5px 0;
-    box-sizing: border-box;
+    padding:10px;
     border: none;
-    border-bottom: 2px solid rgb(187, 255, 0);
-    text-align: center; 
+    border-radius:10px;
+    width: 30%;
+    margin: 10px;
 }
 .col{
     border-radius: 10px;
+    flex-grow: 1;
 }
 .kanban__column{
     border-top: 3px solid rgb(12, 12, 12);
-    padding: 20px 100px;
     position: relative;
+flex-grow: 0;
 }
 
 .kanban__column h3{
     font-size: 25px;
 }
-.kanban__column p{
-    font-size: 20px;
-}
+
 .button{
     cursor: pointer;
     transition: .2s box-shadow;
+    margin: 10px;
+    background: transparent;
+    border-radius: 50%;
+    padding: 5px;
+}
+.kanban__form--button {
+    border: none;
+    background-color: #5cf37f;
+    padding: 5px 50px;
+    border-radius: 10px;
+    text-align: center;
+    width: 20%;
+    margin: 10px auto!important;
+}
+.kanban__form--errors{
+    color: red;
 }
 .button:hover{
-    box-shadow: inset 0 0 100px 100px rgba(255, 255, 255, 0.3);
+    box-shadow: inset 0 0 100px 100px rgba(255, 255, 255, 0.5);
 }
 .tasks__list--task{
     list-style: none;
+    text-align: left;
+    position: relative;
+}
+.task__button--panel{
+    text-align: right;
+}
+.task__author{
+    font-size: 13px;
+    position: absolute;
+    top: 5px;
+    right: 10px;
+}
+.task__title{
+text-align: center;
 }

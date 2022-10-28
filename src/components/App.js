@@ -3,6 +3,7 @@ import Board from './Board';
 import Form from './Form';
 import columns from './columnSettings';
 
+
 // eslint-disable-next-line import/no-named-as-default
 import TaskListContext, { ButtonDisabledContext } from '../context';
 
@@ -25,9 +26,6 @@ const App = function () {
         return tasksLastCol;
     };
 
-    // console.log(getTasksInFirstColumn());
-    // console.log(getTasksInLastColumn());
-
     const getColumnLimit = (idColumn) => {
         const column = columns.find((c) => c.id === idColumn);
         return column.limit;
@@ -46,12 +44,16 @@ const App = function () {
             alert('Limit of tasks exceed');
         }
     };
+    // eslint-disable-next-line no-unused-vars
 
     const deleteTask = (id) => {
         const currTasks = tasks.filter((t) => t.id !== id);
-        setTasks(currTasks);
-        // eslint-disable-next-line no-undef
-        localStorage.setItem('tasks', JSON.stringify(currTasks));
+        // eslint-disable-next-line no-restricted-globals, no-alert, no-undef
+        if (confirm('Are you sure you want to delete this task?')) {
+            setTasks(currTasks);
+            // eslint-disable-next-line no-undef
+            localStorage.setItem('tasks', JSON.stringify(currTasks));
+        }
     };
 
     const moveRight = (id) => {
@@ -98,6 +100,6 @@ const App = function () {
             </ButtonDisabledContext.Provider>
         </TaskListContext.Provider>
     );
-};
+};;
 
 export default App;
