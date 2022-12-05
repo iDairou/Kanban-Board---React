@@ -1,23 +1,22 @@
 # Kanban Board
 
-The aim of the project was to practice modern react usage focusing on functional components, hooks and context. Project is kanban-based tool to make a visualization of workflow. It also allows us to track the tasks.
+The aim of the project was to practice modern react usage focusing on functional components, hooks, and context. The project is a kanban-based tool to make a visualization of workflow. It also allows us to track the tasks.
 
 ### Features:
 
 - **Creating new tasks via validated form**
 - **Task management:**
     - **moving tasks between tables**
-    - **tasks are saved in localStorage to simplify saving data**  
+    - **tasks are saved in localStorage**  
     - **tasks are updating during moving right or left in localStorage** 
-    - **delate tasks**
+    - **delete tasks**
 
 
 ## Built with 🔧
-
+![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
+![JavaScript](https://img.shields.io/badge/JavaScript-323330?style=for-the-badge&logo=javascript&logoColor=F7DF1E)
 ![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)
 ![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)
-![JavaScript](https://img.shields.io/badge/JavaScript-323330?style=for-the-badge&logo=javascript&logoColor=F7DF1E)
-![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
 ![Webpack](https://img.shields.io/badge/Webpack-8DD6F9?style=for-the-badge&logo=Webpack&logoColor=white)
 ![Babel](https://img.shields.io/badge/Babel-F9DC3E?style=for-the-badge&logo=babel&logoColor=white)
 ![BEM Methodology](https://img.shields.io/badge/BEM%20Methodology-29BDfD?style=for-the-badge&logo=BEM&logoColor=white)
