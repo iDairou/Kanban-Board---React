@@ -2,7 +2,7 @@ import React, { useContext, useReducer, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import { TaskListContext } from '../context';
 import fields from './formFields';
-import checkValidation from './validation';
+import checkValidation from './Validation';
 
 const Form = function () {
     const init = {
@@ -12,7 +12,23 @@ const Form = function () {
         idColumn: 1,
     };
 
-    const reducer = (state, { name, value }) => ({ ...state, [name]: value });
+    const reducer = (state, { type, name, value }) => (type !== 'clear' ? { ...state, [name]: value } : init);
+
+    // const reducer = (state, action) => {
+    //     const newState = { ...state };
+    //     switch (action.type) {
+    //         case 'HANDLE INPUT TEXT':
+    //             return {
+    //                 newState,
+    //                 [action.field]: action.value,
+    //             };
+    //         case 'clear':
+    //             return init;
+    //         default:
+    //             return state;
+    //     }
+    // };
+
     const [state, dispatch] = useReducer(reducer, init);
     const [errors, setErrors] = useState('');
     // eslint-disable-next-line no-unused-vars
@@ -24,9 +40,9 @@ const Form = function () {
         if (wrongValues.length === 0) {
             setErrors(...wrongValues);
             addTask({ ...state, id: uuidv4(), isDisabledLeft: false, isDisabledRight: false });
+            dispatch({ type: 'clear' });
         }
     };
-    
 
     return (
         <form className="kanban__form" onSubmit={handleSubmit}>
