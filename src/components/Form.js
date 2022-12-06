@@ -14,20 +14,6 @@ const Form = function () {
 
     const reducer = (state, { type, name, value }) => (type !== 'clear' ? { ...state, [name]: value } : init);
 
-    // const reducer = (state, action) => {
-    //     const newState = { ...state };
-    //     switch (action.type) {
-    //         case 'HANDLE INPUT TEXT':
-    //             return {
-    //                 newState,
-    //                 [action.field]: action.value,
-    //             };
-    //         case 'clear':
-    //             return init;
-    //         default:
-    //             return state;
-    //     }
-    // };
 
     const [state, dispatch] = useReducer(reducer, init);
     const [errors, setErrors] = useState('');
