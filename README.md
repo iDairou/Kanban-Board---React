@@ -1,5 +1,9 @@
 # Kanban Board
 
+## Overview 🔍
+
+![](./src/animation/Animation.gif)
+
 The aim of the project was to practice modern react usage focusing on functional components, hooks, and context. The project is a kanban-based tool to make a visualization of workflow. It also allows us to track the tasks.
 
 ### Features:
