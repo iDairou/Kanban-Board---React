@@ -8,7 +8,8 @@ The aim of the project was to practice modern React usage focusing on **function
 
 ### Features:
 
-- **Creating new tasks via validated form**
+- **Creating new tasks**
+- **Form validation**
 - **Task management:**
     - **moving tasks between tables**
     - **tasks are saved in localStorage**  
