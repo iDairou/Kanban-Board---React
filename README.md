@@ -12,7 +12,7 @@ The aim of the project was to practice modern react usage focusing on functional
 - **Task management:**
     - **moving tasks between tables**
     - **tasks are saved in localStorage**  
-    - **tasks are updated during moving right or left in localStorage** 
+    - **tasks are updated in localStorage during moving right or left** 
     - **delete tasks**
 
 
