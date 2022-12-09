@@ -1,14 +1,19 @@
 # Kanban Board
 
-The aim of the project was to practice modern react usage focusing on functional components, hooks, and context. The project is a kanban-based tool to make a visualization of workflow. It also allows us to track the tasks.
+## Overview 🔍
+
+![](./src/animation/Animation.gif)
+
+The aim of the project was to practice modern React usage focusing on **functional components, hooks, and context.** The project is a kanban-based tool to make a visualization of workflow. It also allows us to track the tasks.
 
 ### Features:
 
-- **Creating new tasks via validated form**
+- **Creating new tasks**
+- **Form validation**
 - **Task management:**
     - **moving tasks between tables**
     - **tasks are saved in localStorage**  
-    - **tasks are updating during moving right or left in localStorage** 
+    - **tasks are updated in localStorage during moving right or left** 
     - **delete tasks**
 
 
